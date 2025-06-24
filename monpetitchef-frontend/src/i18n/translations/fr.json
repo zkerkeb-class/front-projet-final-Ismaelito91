@@ -1,0 +1,65 @@
+{
+  "nav": {
+    "home": "Accueil",
+    "recipes": "Recettes",
+    "favorites": "Favoris",
+    "profile": "Profil",
+    "login": "Connexion",
+    "register": "Inscription"
+  },
+  "auth": {
+    "login": "Connexion",
+    "register": "Inscription",
+    "email": "Email",
+    "password": "Mot de passe",
+    "logout": "Déconnexion",
+    "welcomeBack": "Bon retour parmi nous !",
+    "createAccount": "Créer un compte"
+  },
+  "ui": {
+    "darkMode": "Mode sombre",
+    "lightMode": "Mode clair",
+    "language": "Langue",
+    "loading": "Chargement...",
+    "save": "Sauvegarder",
+    "cancel": "Annuler",
+    "confirm": "Confirmer",
+    "edit": "Modifier",
+    "delete": "Supprimer"
+  },
+  "messages": {
+    "welcome": "Bienvenue sur Mon Petit Chef",
+    "loginSuccess": "Connexion réussie !",
+    "logoutSuccess": "Déconnexion réussie !",
+    "error": "Une erreur est survenue",
+    "notFound": "Page non trouvée",
+    "noRecipes": "Aucune recette trouvée",
+    "loading": "Chargement en cours..."
+  },
+  "recipes": {
+    "title": "Recettes",
+    "search": "Rechercher une recette...",
+    "noResults": "Aucune recette trouvée",
+    "ingredients": "Ingrédients",
+    "instructions": "Instructions",
+    "prepTime": "Temps de préparation",
+    "cookTime": "Temps de cuisson",
+    "servings": "Portions",
+    "difficulty": "Difficulté",
+    "category": "Catégorie"
+  },
+  "favorites": {
+    "title": "Mes favoris",
+    "empty": "Vous n'avez pas encore de recettes favorites",
+    "add": "Ajouter aux favoris",
+    "remove": "Retirer des favoris"
+  },
+  "profile": {
+    "title": "Mon profil",
+    "personalInfo": "Informations personnelles",
+    "name": "Nom",
+    "email": "Email",
+    "phone": "Téléphone",
+    "address": "Adresse"
+  }
+}

@@ -1,0 +1,15 @@
+import React from "react";
+import { useTranslation } from "react-i18next";
+
+const Profile = () => {
+  const { t } = useTranslation();
+
+  return (
+    <div style={{ padding: "2rem", textAlign: "center" }}>
+      <h1>{t("nav.profile")}</h1>
+      <p>🚧 Page en construction 🚧</p>
+    </div>
+  );
+};
+
+export default Profile;

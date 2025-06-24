@@ -1,211 +1,204 @@
-import API_ENDPOINTS from "../config/api.endpoints";
 import tokenService from "./token.service";
+import { API_CONFIG } from "../config/api.config";
 
-// Fonction utilitaire pour gérer les réponses
-const handleResponse = async (response) => {
-  const data = await response.json();
-
-  if (!response.ok) {
-    throw new Error(data.message || "Erreur lors de la requête");
+// Service HTTP générique
+class ApiService {
+  constructor() {
+    this.baseURL = API_CONFIG.baseURL;
   }
 
-  return data;
-};
-
-// Fonction générique pour les appels API
-export const apiCall = async (url, options = {}) => {
-  try {
-    const defaultHeaders = tokenService.getAuthHeaders();
-
-    const response = await fetch(url, {
-      headers: defaultHeaders,
+  async request(endpoint, options = {}) {
+    const url = `${this.baseURL}${endpoint}`;
+    const config = {
+      headers: {
+        ...API_CONFIG.headers,
+        ...options.headers,
+      },
       ...options,
+    };
+
+    // Ajouter le token d'authentification si disponible
+    const token = tokenService.getToken();
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`;
+    }
+
+    console.log("API Request:", {
+      url,
+      method: config.method || "GET",
+      headers: config.headers,
+      body: config.body,
     });
 
-    return await handleResponse(response);
-  } catch (error) {
-    console.error("Erreur API:", error);
-    throw error;
+    try {
+      const response = await fetch(url, config);
+
+      console.log("API Response:", {
+        status: response.status,
+        statusText: response.statusText,
+        ok: response.ok,
+      });
+
+      if (!response.ok) {
+        let errorMessage = `HTTP Error ${response.status}: ${response.statusText}`;
+        let errorData = null;
+
+        try {
+          errorData = await response.json();
+          console.log("Error response data:", errorData);
+
+          // Gestion spécifique selon le format de votre backend
+          if (errorData.message) {
+            errorMessage = errorData.message;
+          } else if (errorData.error) {
+            errorMessage = errorData.error;
+          }
+        } catch {
+          // Si on ne peut pas parser le JSON d'erreur, on garde le message par défaut
+        }
+
+        const error = new Error(errorMessage);
+        // Ajouter les erreurs de validation si elles existent
+        if (errorData && errorData.errors) {
+          error.errors = errorData.errors;
+          error.validationErrors = true;
+        }
+
+        throw error;
+      }
+
+      // Si la réponse est vide (204 No Content), retourner un objet vide
+      if (response.status === 204) {
+        return {};
+      }
+
+      const data = await response.json();
+      console.log("API Data:", data);
+      return data;
+    } catch (error) {
+      console.error("API Error:", error);
+      throw error;
+    }
   }
-};
 
-// Fonction pour les appels avec FormData (upload de fichiers)
-export const apiCallWithFormData = async (url, formData, method = "POST") => {
-  try {
-    const headers = tokenService.getAuthHeadersForFormData();
+  // Méthodes HTTP
+  get(endpoint, options = {}) {
+    return this.request(endpoint, { ...options, method: "GET" });
+  }
 
-    const response = await fetch(url, {
-      method,
-      headers,
+  post(endpoint, data, options = {}) {
+    return this.request(endpoint, {
+      ...options,
+      method: "POST",
+      body: JSON.stringify(data),
+    });
+  }
+
+  put(endpoint, data, options = {}) {
+    return this.request(endpoint, {
+      ...options,
+      method: "PUT",
+      body: JSON.stringify(data),
+    });
+  }
+
+  delete(endpoint, options = {}) {
+    return this.request(endpoint, { ...options, method: "DELETE" });
+  }
+
+  // Pour les uploads de fichiers
+  postFormData(endpoint, formData, options = {}) {
+    const headers = { ...options.headers };
+    delete headers["Content-Type"]; // Laisser le navigateur définir le Content-Type pour FormData
+
+    return this.request(endpoint, {
+      ...options,
+      method: "POST",
       body: formData,
+      headers,
     });
-
-    return await handleResponse(response);
-  } catch (error) {
-    console.error("Erreur API:", error);
-    throw error;
   }
-};
+}
 
-// Services spécifiques pour chaque entité
+const apiService = new ApiService();
+
+// Services spécialisés
 export const authService = {
-  register: (userData) =>
-    apiCall(API_ENDPOINTS.AUTH.REGISTER, {
-      method: "POST",
-      body: JSON.stringify(userData),
-    }),
+  async login(credentials) {
+    console.log("Attempting login with:", credentials);
+    const response = await apiService.post("/auth/login", credentials);
 
-  login: async (credentials) => {
-    const data = await apiCall(API_ENDPOINTS.AUTH.LOGIN, {
-      method: "POST",
-      body: JSON.stringify(credentials),
-    });
+    // Gestion flexible des différents formats de réponse
+    if (response.token || response.access_token) {
+      const token = response.token || response.access_token;
+      const user = response.user || response.data || response;
 
-    // Stocker le token et l'utilisateur
-    if (data.token) {
-      tokenService.setToken(data.token);
-      tokenService.setUser(data.user);
+      tokenService.setToken(token);
+      tokenService.setUser(user);
     }
 
-    return data;
+    return response;
   },
 
-  logout: () => apiCall(API_ENDPOINTS.AUTH.LOGOUT),
-
-  getMe: () => apiCall(API_ENDPOINTS.AUTH.ME),
-
-  updateDetails: (userData) =>
-    apiCall(API_ENDPOINTS.AUTH.UPDATE_DETAILS, {
-      method: "PUT",
-      body: JSON.stringify(userData),
-    }),
-
-  updatePassword: (passwordData) =>
-    apiCall(API_ENDPOINTS.AUTH.UPDATE_PASSWORD, {
-      method: "PUT",
-      body: JSON.stringify(passwordData),
-    }),
-};
-
-export const recettesService = {
-  getAll: (params = "") =>
-    apiCall(`${API_ENDPOINTS.RECETTES.GET_ALL}${params}`),
-
-  getOne: (id) => apiCall(API_ENDPOINTS.RECETTES.GET_ONE(id)),
-
-  create: (recetteData, image = null) => {
-    if (image) {
-      const formData = new FormData();
-      Object.keys(recetteData).forEach((key) => {
-        if (Array.isArray(recetteData[key])) {
-          formData.append(key, JSON.stringify(recetteData[key]));
-        } else {
-          formData.append(key, recetteData[key]);
-        }
-      });
-      formData.append("image", image);
-      return apiCallWithFormData(API_ENDPOINTS.RECETTES.CREATE, formData);
-    } else {
-      return apiCall(API_ENDPOINTS.RECETTES.CREATE, {
-        method: "POST",
-        body: JSON.stringify(recetteData),
-      });
+  async logout() {
+    try {
+      await apiService.post("/auth/logout");
+    } finally {
+      tokenService.clear();
     }
   },
 
-  update: (id, recetteData, image = null) => {
-    if (image) {
-      const formData = new FormData();
-      Object.keys(recetteData).forEach((key) => {
-        if (Array.isArray(recetteData[key])) {
-          formData.append(key, JSON.stringify(recetteData[key]));
-        } else {
-          formData.append(key, recetteData[key]);
-        }
-      });
-      formData.append("image", image);
-      return apiCallWithFormData(
-        API_ENDPOINTS.RECETTES.UPDATE(id),
-        formData,
-        "PUT"
-      );
-    } else {
-      return apiCall(API_ENDPOINTS.RECETTES.UPDATE(id), {
-        method: "PUT",
-        body: JSON.stringify(recetteData),
-      });
+  async register(userData) {
+    console.log("Attempting registration with:", userData);
+    const response = await apiService.post("/auth/register", userData);
+
+    // Gestion flexible des différents formats de réponse
+    if (response.token || response.access_token) {
+      const token = response.token || response.access_token;
+      const user = response.user || response.data || response;
+
+      tokenService.setToken(token);
+      tokenService.setUser(user);
     }
+
+    return response;
   },
 
-  delete: (id) =>
-    apiCall(API_ENDPOINTS.RECETTES.DELETE(id), {
-      method: "DELETE",
-    }),
-
-  getPopulaires: (limit = 5) =>
-    apiCall(`${API_ENDPOINTS.RECETTES.POPULAIRES}?limit=${limit}`),
-
-  getRecentes: (limit = 5) =>
-    apiCall(`${API_ENDPOINTS.RECETTES.RECENTES}?limit=${limit}`),
-
-  addNote: (id, note) =>
-    apiCall(API_ENDPOINTS.RECETTES.ADD_NOTE(id), {
-      method: "POST",
-      body: JSON.stringify({ valeur: note }),
-    }),
-
-  addToFavoris: (id) =>
-    apiCall(API_ENDPOINTS.RECETTES.ADD_FAVORI(id), {
-      method: "POST",
-    }),
-
-  removeFromFavoris: (id) =>
-    apiCall(API_ENDPOINTS.RECETTES.REMOVE_FAVORI(id), {
-      method: "DELETE",
-    }),
-};
-
-export const commentairesService = {
-  getByRecette: (recetteId) =>
-    apiCall(API_ENDPOINTS.COMMENTAIRES.GET_BY_RECETTE(recetteId)),
-
-  add: (recetteId, texte) =>
-    apiCall(API_ENDPOINTS.COMMENTAIRES.ADD(recetteId), {
-      method: "POST",
-      body: JSON.stringify({ texte }),
-    }),
-
-  update: (id, texte) =>
-    apiCall(API_ENDPOINTS.COMMENTAIRES.UPDATE(id), {
-      method: "PUT",
-      body: JSON.stringify({ texte }),
-    }),
-
-  delete: (id) =>
-    apiCall(API_ENDPOINTS.COMMENTAIRES.DELETE(id), {
-      method: "DELETE",
-    }),
-};
-
-export const usersService = {
-  getProfile: (id) => apiCall(API_ENDPOINTS.USERS.GET_PROFILE(id)),
-
-  getFavoris: (id) => apiCall(API_ENDPOINTS.USERS.GET_FAVORIS(id)),
-
-  updateAvatar: (id, avatarFile) => {
-    const formData = new FormData();
-    formData.append("avatar", avatarFile);
-    return apiCallWithFormData(
-      API_ENDPOINTS.USERS.UPDATE_AVATAR(id),
-      formData,
-      "PUT"
-    );
+  async getCurrentUser() {
+    return await apiService.get("/auth/me");
   },
 };
 
-export default {
-  authService,
-  recettesService,
-  commentairesService,
-  usersService,
+export const recipesService = {
+  async getAll(params = {}) {
+    const queryString = new URLSearchParams(params).toString();
+    const endpoint = queryString ? `/recipes?${queryString}` : "/recipes";
+    return await apiService.get(endpoint);
+  },
+
+  async getById(id) {
+    return await apiService.get(`/recipes/${id}`);
+  },
+
+  async search(query, filters = {}) {
+    const params = { q: query, ...filters };
+    const queryString = new URLSearchParams(params).toString();
+    return await apiService.get(`/recipes/search?${queryString}`);
+  },
 };
+
+export const favoritesService = {
+  async getAll() {
+    return await apiService.get("/favorites");
+  },
+
+  async add(recipeId) {
+    return await apiService.post("/favorites", { recipe_id: recipeId });
+  },
+
+  async remove(recipeId) {
+    return await apiService.delete(`/favorites/${recipeId}`);
+  },
+};
+
+export default apiService;

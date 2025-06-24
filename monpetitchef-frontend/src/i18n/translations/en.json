@@ -1,0 +1,65 @@
+{
+  "nav": {
+    "home": "Home",
+    "recipes": "Recipes",
+    "favorites": "Favorites",
+    "profile": "Profile",
+    "login": "Login",
+    "register": "Sign Up"
+  },
+  "auth": {
+    "login": "Login",
+    "register": "Sign Up",
+    "email": "Email",
+    "password": "Password",
+    "logout": "Logout",
+    "welcomeBack": "Welcome back!",
+    "createAccount": "Create account"
+  },
+  "ui": {
+    "darkMode": "Dark mode",
+    "lightMode": "Light mode",
+    "language": "Language",
+    "loading": "Loading...",
+    "save": "Save",
+    "cancel": "Cancel",
+    "confirm": "Confirm",
+    "edit": "Edit",
+    "delete": "Delete"
+  },
+  "messages": {
+    "welcome": "Welcome to Mon Petit Chef",
+    "loginSuccess": "Login successful!",
+    "logoutSuccess": "Logout successful!",
+    "error": "An error occurred",
+    "notFound": "Page not found",
+    "noRecipes": "No recipes found",
+    "loading": "Loading..."
+  },
+  "recipes": {
+    "title": "Recipes",
+    "search": "Search for a recipe...",
+    "noResults": "No recipes found",
+    "ingredients": "Ingredients",
+    "instructions": "Instructions",
+    "prepTime": "Prep time",
+    "cookTime": "Cook time",
+    "servings": "Servings",
+    "difficulty": "Difficulty",
+    "category": "Category"
+  },
+  "favorites": {
+    "title": "My favorites",
+    "empty": "You don't have any favorite recipes yet",
+    "add": "Add to favorites",
+    "remove": "Remove from favorites"
+  },
+  "profile": {
+    "title": "My profile",
+    "personalInfo": "Personal information",
+    "name": "Name",
+    "email": "Email",
+    "phone": "Phone",
+    "address": "Address"
+  }
+}
