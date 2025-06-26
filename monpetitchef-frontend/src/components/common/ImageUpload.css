@@ -1,0 +1,334 @@
+/* Image Upload Component */
+.image-upload {
+  margin-bottom: var(--space-md);
+}
+
+.image-upload-label {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+  margin-bottom: var(--space-sm);
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.label-icon {
+  font-size: 1.2em;
+}
+
+.label-optional {
+  font-size: 0.85em;
+  font-weight: 400;
+  color: var(--text-secondary);
+  font-style: italic;
+}
+
+/* Zone de drop */
+.image-drop-zone {
+  border: 2px dashed var(--border-color);
+  border-radius: var(--radius-lg);
+  padding: var(--space-lg);
+  text-align: center;
+  cursor: pointer;
+  transition: all var(--transition-base);
+  background: var(--bg-secondary);
+  position: relative;
+  min-height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.image-drop-zone:hover {
+  border-color: var(--primary-color);
+  background: var(--primary-color-10);
+}
+
+.image-drop-zone--dragging {
+  border-color: var(--primary-color);
+  background: var(--primary-color-20);
+  transform: scale(1.02);
+}
+
+.image-drop-zone--error {
+  border-color: var(--error-color);
+  background: var(--error-color-10);
+}
+
+.image-input-hidden {
+  display: none;
+}
+
+/* Contenu de la zone de drop */
+.drop-zone-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.drop-zone-icon {
+  font-size: 3em;
+  opacity: 0.7;
+  animation: float 3s ease-in-out infinite;
+}
+
+.drop-zone-text {
+  font-size: 1.1em;
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+.drop-zone-subtext {
+  font-size: 0.9em;
+  color: var(--text-secondary);
+  max-width: 300px;
+}
+
+/* Preview de l'image */
+.image-preview {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 200px;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+
+.preview-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: var(--radius-md);
+  transition: transform var(--transition-base);
+}
+
+.image-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-sm);
+  opacity: 0;
+  transition: opacity var(--transition-base);
+}
+
+.image-preview:hover .image-overlay {
+  opacity: 1;
+}
+
+.image-preview:hover .preview-image {
+  transform: scale(1.05);
+}
+
+.btn-remove-image,
+.btn-change-image {
+  background: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: var(--space-sm) var(--space-md);
+  color: var(--text-primary);
+  cursor: pointer;
+  font-size: 0.9em;
+  font-weight: 500;
+  transition: all var(--transition-base);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+}
+
+.btn-remove-image:hover {
+  background: var(--error-color);
+  color: white;
+  border-color: var(--error-color);
+}
+
+.btn-change-image:hover {
+  background: var(--primary-color);
+  color: white;
+  border-color: var(--primary-color);
+}
+
+.image-info {
+  position: absolute;
+  bottom: var(--space-sm);
+  right: var(--space-sm);
+  background: rgba(0, 0, 0, 0.8);
+  color: white;
+  padding: var(--space-xs) var(--space-sm);
+  border-radius: var(--radius-sm);
+  font-size: 0.8em;
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+}
+
+/* Barre de progression */
+.upload-progress {
+  position: absolute;
+  bottom: var(--space-md);
+  left: var(--space-md);
+  right: var(--space-md);
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: var(--radius-md);
+  padding: var(--space-sm);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+}
+
+.progress-bar {
+  width: 100%;
+  height: 8px;
+  background: var(--bg-tertiary);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  margin-bottom: var(--space-xs);
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    var(--primary-color),
+    var(--secondary-color)
+  );
+  border-radius: var(--radius-sm);
+  transition: width var(--transition-base);
+  animation: shimmer 2s infinite;
+}
+
+.progress-text {
+  display: block;
+  text-align: center;
+  font-size: 0.8em;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+/* Message d'erreur */
+.image-upload-error {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+  margin-top: var(--space-sm);
+  padding: var(--space-sm);
+  background: var(--error-color-10);
+  border: 1px solid var(--error-color-30);
+  border-radius: var(--radius-md);
+  color: var(--error-color);
+  font-size: 0.9em;
+}
+
+.error-icon {
+  font-size: 1.1em;
+}
+
+/* Conseils */
+.image-upload-tips {
+  margin-top: var(--space-md);
+  padding: var(--space-md);
+  background: var(--primary-color-10);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--primary-color-20);
+}
+
+.tip-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-xs);
+  font-size: 0.85em;
+  color: var(--text-secondary);
+}
+
+.tip-item:last-child {
+  margin-bottom: 0;
+}
+
+/* Animations */
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -1000px 0;
+  }
+  100% {
+    background-position: 1000px 0;
+  }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .image-drop-zone {
+    padding: var(--space-md);
+    min-height: 160px;
+  }
+
+  .drop-zone-icon {
+    font-size: 2.5em;
+  }
+
+  .drop-zone-text {
+    font-size: 1em;
+  }
+
+  .drop-zone-subtext {
+    font-size: 0.8em;
+  }
+
+  .image-overlay {
+    flex-direction: column;
+    gap: var(--space-xs);
+  }
+
+  .btn-remove-image,
+  .btn-change-image {
+    padding: var(--space-xs) var(--space-sm);
+    font-size: 0.8em;
+  }
+
+  .image-upload-tips {
+    padding: var(--space-sm);
+  }
+
+  .tip-item {
+    font-size: 0.8em;
+  }
+}
+
+/* États pour l'accessibilité */
+.image-drop-zone:focus-within {
+  outline: 2px solid var(--primary-color);
+  outline-offset: 2px;
+}
+
+/* Mode sombre spécifique */
+[data-theme="dark"] .image-drop-zone {
+  background: var(--bg-tertiary);
+}
+
+[data-theme="dark"] .btn-remove-image,
+[data-theme="dark"] .btn-change-image {
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--text-primary);
+  border-color: var(--border-color);
+}
+
+[data-theme="dark"] .upload-progress {
+  background: rgba(0, 0, 0, 0.8);
+}
+
+[data-theme="dark"] .image-info {
+  background: rgba(255, 255, 255, 0.2);
+}

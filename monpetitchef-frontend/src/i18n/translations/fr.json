@@ -5,16 +5,43 @@
     "favorites": "Favoris",
     "profile": "Profil",
     "login": "Connexion",
-    "register": "Inscription"
+    "register": "Inscription",
+    "addRecipe": "Ajouter une recette"
   },
   "auth": {
     "login": "Connexion",
     "register": "Inscription",
     "email": "Email",
     "password": "Mot de passe",
+    "confirmPassword": "Confirmer le mot de passe",
+    "firstName": "Prénom",
+    "lastName": "Nom",
     "logout": "Déconnexion",
     "welcomeBack": "Bon retour parmi nous !",
-    "createAccount": "Créer un compte"
+    "createAccount": "Créer un compte",
+    "signUpFree": "S'inscrire gratuitement",
+    "alreadyAccount": "Déjà un compte ?",
+    "noAccount": "Pas encore de compte ?",
+    "createAccountSubtitle": "Créez votre compte et commencez à cuisiner !",
+    "registerSubtitle": "Créez votre compte et commencez à cuisiner !",
+    "required": "*",
+    "passwordHint": "Minimum 6 caractères",
+    "placeholders": {
+      "firstName": "Jean",
+      "lastName": "Dupont",
+      "email": "jean.dupont@example.com",
+      "password": "••••••••"
+    }
+  },
+  "validation": {
+    "required": "requis",
+    "nameRequired": "Le nom est requis",
+    "firstNameRequired": "Le prénom est requis",
+    "emailRequired": "L'email est requis",
+    "passwordRequired": "Le mot de passe est requis",
+    "passwordMismatch": "Les mots de passe ne correspondent pas",
+    "minLength": "doit contenir au moins {count} caractères",
+    "invalidEmail": "Format d'email invalide"
   },
   "ui": {
     "darkMode": "Mode sombre",
@@ -25,19 +52,47 @@
     "cancel": "Annuler",
     "confirm": "Confirmer",
     "edit": "Modifier",
-    "delete": "Supprimer"
+    "delete": "Supprimer",
+    "close": "Fermer",
+    "back": "Retour",
+    "next": "Suivant",
+    "previous": "Précédent",
+    "viewAll": "Voir tout",
+    "seeRecipes": "Voir les recettes"
   },
   "messages": {
     "welcome": "Bienvenue sur Mon Petit Chef",
     "loginSuccess": "Connexion réussie !",
+    "loginError": "Erreur de connexion",
     "logoutSuccess": "Déconnexion réussie !",
+    "logoutOffline": "Déconnexion locale effectuée",
+    "registrationSuccess": "Inscription réussie ! Bienvenue !",
+    "registrationError": "Erreur lors de l'inscription",
     "error": "Une erreur est survenue",
     "notFound": "Page non trouvée",
     "noRecipes": "Aucune recette trouvée",
-    "loading": "Chargement en cours..."
+    "loading": "Chargement en cours...",
+    "loadingRecipes": "Erreur lors du chargement des recettes"
+  },
+  "home": {
+    "subtitle": "Découvrez, partagez et savourez les meilleures recettes du monde",
+    "features": {
+      "recipes": {
+        "title": "Recettes variées",
+        "description": "Des milliers de recettes pour tous les goûts"
+      },
+      "favorites": {
+        "title": "Favoris",
+        "description": "Sauvegardez vos recettes préférées"
+      },
+      "community": {
+        "title": "Communauté",
+        "description": "Partagez et commentez vos créations"
+      }
+    }
   },
   "recipes": {
-    "title": "Recettes",
+    "title": "Nos Recettes",
     "search": "Rechercher une recette...",
     "noResults": "Aucune recette trouvée",
     "ingredients": "Ingrédients",
@@ -46,7 +101,14 @@
     "cookTime": "Temps de cuisson",
     "servings": "Portions",
     "difficulty": "Difficulté",
-    "category": "Catégorie"
+    "category": "Catégorie",
+    "allCategories": "Toutes les catégories",
+    "allDifficulties": "Toutes les difficultés",
+    "filters": "Filtres",
+    "by": "par",
+    "minutes": "min",
+    "rating": "Note",
+    "viewRecipe": "Voir la recette"
   },
   "favorites": {
     "title": "Mes favoris",
@@ -61,5 +123,56 @@
     "email": "Email",
     "phone": "Téléphone",
     "address": "Adresse"
+  },
+  "infoCards": {
+    "whyTitle": "Pourquoi MonPetitChef ?",
+    "subtitle": "Découvrez ce qui rend notre communauté culinaire si spéciale",
+    "community": {
+      "title": "Communauté de confiance",
+      "description": "MonPetitChef est une plateforme communautaire où chaque recette est partagée par des passionnés de cuisine comme vous.",
+      "highlight": "Nous faisons confiance à nos utilisateurs"
+    },
+    "sharing": {
+      "title": "Partage authentique",
+      "description": "Partagez vos recettes familiales, vos créations originales et découvrez les secrets culinaires de notre communauté.",
+      "highlight": "Des recettes vérifiées et approuvées"
+    },
+    "discovery": {
+      "title": "Découverte culinaire",
+      "description": "Explorez une diversité de saveurs, techniques et traditions culinaires du monde entier, directement de nos cuisines.",
+      "highlight": "Plus de 1000 recettes disponibles"
+    },
+    "quality": {
+      "title": "Qualité assurée",
+      "description": "Système de notation et commentaires pour vous aider à choisir les meilleures recettes selon votre goût.",
+      "highlight": "Notes et avis authentiques"
+    },
+    "joinCommunity": "Rejoignez notre communauté !",
+    "joinDescription": "Créez votre compte gratuit et commencez à partager vos recettes préférées avec des milliers de passionnés.",
+    "connect": "Se connecter",
+    "statsTitle": "Notre communauté en chiffres",
+    "stats": {
+      "recipes": "Recettes",
+      "chefs": "Chefs",
+      "reviews": "Avis",
+      "favorites": "Favoris"
+    },
+    "tipOfDay": "Astuce du jour",
+    "tipContent": "Pour des pâtisseries réussies, pesez toujours vos ingrédients plutôt que de les mesurer en volume. La précision est la clé !",
+    "tipAuthor": "— Chef Marie, spécialiste pâtisserie"
+  },
+  "sidebar": {
+    "userSection": "Espace utilisateur",
+    "navigation": "Navigation",
+    "quickActions": "Actions rapides",
+    "statistics": "Statistiques",
+    "settings": "Paramètres",
+    "descriptions": {
+      "home": "Retour à l'accueil",
+      "recipes": "Découvrir les recettes",
+      "favorites": "Mes recettes favorites",
+      "profile": "Gérer mon compte",
+      "addRecipe": "Créer une nouvelle recette"
+    }
   }
 }

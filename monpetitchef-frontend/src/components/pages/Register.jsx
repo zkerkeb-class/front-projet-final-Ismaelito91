@@ -43,39 +43,38 @@ const Register = () => {
 
     // Validation du nom
     if (!formData.nom.trim()) {
-      newErrors.nom = "Le nom est requis";
+      newErrors.nom = t("validation.nameRequired");
     } else if (formData.nom.trim().length < 2) {
-      newErrors.nom = "Le nom doit contenir au moins 2 caractères";
+      newErrors.nom = t("validation.minLength", { count: 2 });
     }
 
     // Validation du prénom
     if (!formData.prenom.trim()) {
-      newErrors.prenom = "Le prénom est requis";
+      newErrors.prenom = t("validation.firstNameRequired");
     } else if (formData.prenom.trim().length < 2) {
-      newErrors.prenom = "Le prénom doit contenir au moins 2 caractères";
+      newErrors.prenom = t("validation.minLength", { count: 2 });
     }
 
     // Validation de l'email
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!formData.email.trim()) {
-      newErrors.email = "L'email est requis";
+      newErrors.email = t("validation.emailRequired");
     } else if (!emailRegex.test(formData.email)) {
-      newErrors.email = "Format d'email invalide";
+      newErrors.email = t("validation.invalidEmail");
     }
 
     // Validation du mot de passe
     if (!formData.password) {
-      newErrors.password = "Le mot de passe est requis";
+      newErrors.password = t("validation.passwordRequired");
     } else if (formData.password.length < 6) {
-      newErrors.password =
-        "Le mot de passe doit contenir au moins 6 caractères";
+      newErrors.password = t("validation.minLength", { count: 6 });
     }
 
     // Validation de la confirmation
     if (!formData.confirmPassword) {
-      newErrors.confirmPassword = "La confirmation est requise";
+      newErrors.confirmPassword = t("validation.passwordRequired");
     } else if (formData.password !== formData.confirmPassword) {
-      newErrors.confirmPassword = "Les mots de passe ne correspondent pas";
+      newErrors.confirmPassword = t("validation.passwordMismatch");
     }
 
     setErrors(newErrors);
@@ -104,7 +103,7 @@ const Register = () => {
       const response = await authService.register(userData);
       console.log("Registration response:", response);
 
-      addNotification("success", "Inscription réussie ! Bienvenue !");
+      addNotification("success", t("messages.registrationSuccess"));
       navigate("/");
     } catch (error) {
       console.error("Registration error:", error);
@@ -121,29 +120,12 @@ const Register = () => {
         setErrors(backendErrors);
       }
 
-      addNotification("error", error.message || "Erreur lors de l'inscription");
+      addNotification(
+        "error",
+        error.message || t("messages.registrationError")
+      );
     } finally {
       setLoading(false);
-    }
-  };
-
-  const handleTestRegistration = async () => {
-    console.log("Testing registration...");
-    try {
-      const testUserData = {
-        nom: "Dupont",
-        prenom: "Jean",
-        email: "jean.dupont@example.com",
-        password: "password123",
-      };
-
-      console.log("Sending test registration...");
-      const response = await authService.register(testUserData);
-      console.log("Backend registration response:", response);
-      alert("Test d'inscription réussi ! Voir console pour détails.");
-    } catch (error) {
-      console.error("Test registration failed:", error);
-      alert(`Erreur test inscription: ${error.message}`);
     }
   };
 
@@ -160,16 +142,14 @@ const Register = () => {
         <div className="auth-card">
           <div className="auth-card-header">
             <h1 className="auth-title">{t("auth.register")}</h1>
-            <p className="auth-subtitle">
-              Créez votre compte et commencez à cuisiner !
-            </p>
+            <p className="auth-subtitle">{t("auth.registerSubtitle")}</p>
           </div>
 
           <form onSubmit={handleSubmit} className="auth-form">
             <div className="form-row">
               <div className="form-group">
                 <label htmlFor="nom" className="form-label">
-                  Nom *
+                  {t("auth.lastName")} *
                 </label>
                 <input
                   type="text"
@@ -180,7 +160,7 @@ const Register = () => {
                   className={`form-input ${
                     errors.nom ? "form-input--error" : ""
                   }`}
-                  placeholder="Dupont"
+                  placeholder={t("auth.placeholders.lastName")}
                   disabled={loading}
                 />
                 {errors.nom && <span className="form-error">{errors.nom}</span>}
@@ -188,7 +168,7 @@ const Register = () => {
 
               <div className="form-group">
                 <label htmlFor="prenom" className="form-label">
-                  Prénom *
+                  {t("auth.firstName")} *
                 </label>
                 <input
                   type="text"
@@ -199,7 +179,7 @@ const Register = () => {
                   className={`form-input ${
                     errors.prenom ? "form-input--error" : ""
                   }`}
-                  placeholder="Jean"
+                  placeholder={t("auth.placeholders.firstName")}
                   disabled={loading}
                 />
                 {errors.prenom && (
@@ -221,7 +201,7 @@ const Register = () => {
                 className={`form-input ${
                   errors.email ? "form-input--error" : ""
                 }`}
-                placeholder="jean.dupont@example.com"
+                placeholder={t("auth.placeholders.email")}
                 disabled={loading}
               />
               {errors.email && (
@@ -242,18 +222,18 @@ const Register = () => {
                 className={`form-input ${
                   errors.password ? "form-input--error" : ""
                 }`}
-                placeholder="••••••••"
+                placeholder={t("auth.placeholders.password")}
                 disabled={loading}
               />
               {errors.password && (
                 <span className="form-error">{errors.password}</span>
               )}
-              <small className="form-hint">Minimum 6 caractères</small>
+              <small className="form-hint">{t("auth.passwordHint")}</small>
             </div>
 
             <div className="form-group">
               <label htmlFor="confirmPassword" className="form-label">
-                Confirmer le mot de passe *
+                {t("auth.confirmPassword")} *
               </label>
               <input
                 type="password"
@@ -264,7 +244,7 @@ const Register = () => {
                 className={`form-input ${
                   errors.confirmPassword ? "form-input--error" : ""
                 }`}
-                placeholder="••••••••"
+                placeholder={t("auth.placeholders.password")}
                 disabled={loading}
               />
               {errors.confirmPassword && (
@@ -286,21 +266,11 @@ const Register = () => {
                 </>
               )}
             </button>
-
-            {/* Bouton de test - À supprimer en production */}
-            <button
-              type="button"
-              onClick={handleTestRegistration}
-              className="auth-btn auth-btn--secondary"
-              style={{ marginTop: "1rem" }}
-            >
-              🔧 Test Inscription
-            </button>
           </form>
 
           <div className="auth-footer">
             <p>
-              Déjà un compte ?{" "}
+              {t("auth.alreadyAccount")}{" "}
               <Link to="/login" className="auth-link">
                 {t("auth.login")}
               </Link>

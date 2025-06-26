@@ -10,7 +10,6 @@
 .main-layout__content {
   flex: 1;
   display: flex;
-  flex-direction: column;
   min-height: calc(100vh - 64px);
 }
 
@@ -28,6 +27,7 @@
   flex: 1;
   overflow-y: auto;
   background: var(--bg-primary);
+  min-width: 0; /* Pour éviter le débordement */
 }
 
 /* Overlay pour mobile quand sidebar ouverte */
@@ -47,6 +47,13 @@
 .main-layout__overlay--visible {
   opacity: 1;
   visibility: visible;
+}
+
+.main-layout__container {
+  padding: var(--spacing-lg);
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
 }
 
 /* Responsive */

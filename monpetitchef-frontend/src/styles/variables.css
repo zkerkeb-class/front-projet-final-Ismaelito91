@@ -6,6 +6,7 @@
   --primary-color: #ff6b6b;
   --primary-hover: #ff5252;
   --primary-light: #ffe0e0;
+  --primary-rgb: 255, 107, 107;
 
   --secondary-color: #4ecdc4;
   --secondary-hover: #26a69a;
@@ -30,6 +31,7 @@
   --success-light: #e8f5e8;
   --warning-color: #fdcb6e;
   --warning-light: #fff8e1;
+  --warning-rgb: 253, 203, 110;
   --error-color: #e17055;
   --error-light: #ffebee;
   --info-color: #74b9ff;

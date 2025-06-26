@@ -14,8 +14,6 @@ const Header = ({ onToggleSidebar }) => {
 
   const user = getUser();
 
-  console.log("Header - isAuthenticated:", isAuthenticated); // Debug
-
   const handleLogout = async () => {
     try {
       await logout();
@@ -36,12 +34,10 @@ const Header = ({ onToggleSidebar }) => {
   };
 
   const handleLoginClick = () => {
-    console.log("Login button clicked"); // Debug
     navigate("/login");
   };
 
   const handleRegisterClick = () => {
-    console.log("Register button clicked"); // Debug
     navigate("/register");
   };
 
@@ -74,9 +70,17 @@ const Header = ({ onToggleSidebar }) => {
             {t("nav.recipes")}
           </Link>
           {isAuthenticated && (
-            <Link to="/favorites" className="header__nav-link">
-              {t("nav.favorites")}
-            </Link>
+            <>
+              <Link
+                to="/recipes/add"
+                className="header__nav-link header__nav-link--highlighted"
+              >
+                ✨ Créer une recette
+              </Link>
+              <Link to="/favorites" className="header__nav-link">
+                {t("nav.favorites")}
+              </Link>
+            </>
           )}
         </nav>
 

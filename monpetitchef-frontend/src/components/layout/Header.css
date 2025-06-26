@@ -107,6 +107,28 @@
   border-radius: 1px;
 }
 
+.header__nav-link--highlighted {
+  background: linear-gradient(
+    135deg,
+    var(--primary-color),
+    var(--secondary-color)
+  );
+  color: white !important;
+  font-weight: 600;
+  border-radius: var(--radius-md);
+  animation: sparkle 2s 2 ease-in-out;
+}
+
+.header__nav-link--highlighted:hover {
+  background: linear-gradient(
+    135deg,
+    var(--secondary-color),
+    var(--primary-color)
+  );
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
+}
+
 /* Actions */
 .header__actions {
   display: flex;
@@ -301,7 +323,7 @@
 
 .header__btn-icon {
   font-size: var(--font-size-sm);
-  animation: sparkle 2s infinite;
+  animation: sparkle 2s 2 ease-in-out;
 }
 
 /* Responsive Design */

@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import useAuth from "../../hooks/useAuth";
 import Loader from "../common/Loader";
-import { authService } from "../../services/api.service";
+
 import "./Auth.css";
 
 const Login = () => {
@@ -31,24 +31,6 @@ const Login = () => {
       navigate("/");
     } catch {
       // L'erreur est déjà gérée dans useAuth
-    }
-  };
-
-  const handleTestConnection = async () => {
-    console.log("Testing backend connection...");
-    try {
-      const testCredentials = {
-        email: "test@example.com",
-        password: "password123",
-      };
-
-      console.log("Sending test request...");
-      const response = await authService.login(testCredentials);
-      console.log("Backend response:", response);
-      alert("Connexion au backend réussie ! Voir console pour détails.");
-    } catch (error) {
-      console.error("Test connection failed:", error);
-      alert(`Erreur connexion backend: ${error.message}`);
     }
   };
 
@@ -116,16 +98,6 @@ const Login = () => {
                   {t("auth.login")}
                 </>
               )}
-            </button>
-
-            {/* Bouton de test - À supprimer en production */}
-            <button
-              type="button"
-              onClick={handleTestConnection}
-              className="auth-btn auth-btn--secondary"
-              style={{ marginTop: "1rem" }}
-            >
-              🔧 Test Backend
             </button>
           </form>
 

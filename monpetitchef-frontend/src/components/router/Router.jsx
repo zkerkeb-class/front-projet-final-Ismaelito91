@@ -1,31 +1,21 @@
 import React from "react";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-import useAuth from "../../hooks/useAuth";
-import Loader from "../common/Loader";
-
-// Layouts
+import { useAuth } from "../../hooks/useAuth";
 import MainLayout from "../layout/MainLayout";
-
-// Pages
 import Home from "../pages/Home";
 import Login from "../pages/Login";
 import Register from "../pages/Register";
 import Recipes from "../pages/Recipes";
+import AddRecipe from "../pages/AddRecipe";
 import RecipeDetail from "../pages/RecipeDetail";
 import Favorites from "../pages/Favorites";
 import Profile from "../pages/Profile";
 import NotFound from "../pages/NotFound";
+import Loader from "../common/Loader";
 
-// Composant pour les routes protégées
+// Composant pour les routes protégées (nécessite une authentification)
 const ProtectedRoute = ({ children }) => {
   const { isAuthenticated, initialLoading } = useAuth();
-
-  console.log(
-    "ProtectedRoute - isAuthenticated:",
-    isAuthenticated,
-    "initialLoading:",
-    initialLoading
-  );
 
   if (initialLoading) {
     return <Loader />;
@@ -34,27 +24,18 @@ const ProtectedRoute = ({ children }) => {
   return isAuthenticated ? children : <Navigate to="/login" replace />;
 };
 
-// Composant pour les routes publiques (redirection si connecté)
+// Composant pour les routes publiques (redirection si déjà connecté)
 const PublicRoute = ({ children }) => {
   const { isAuthenticated, initialLoading } = useAuth();
-
-  console.log(
-    "PublicRoute - isAuthenticated:",
-    isAuthenticated,
-    "initialLoading:",
-    initialLoading
-  );
 
   if (initialLoading) {
     return <Loader />;
   }
 
-  return !isAuthenticated ? children : <Navigate to="/" replace />;
+  return isAuthenticated ? <Navigate to="/" replace /> : children;
 };
 
 const Router = () => {
-  console.log("Router rendering");
-
   return (
     <BrowserRouter>
       <Routes>
@@ -80,9 +61,15 @@ const Router = () => {
         <Route path="/" element={<MainLayout />}>
           <Route index element={<Home />} />
           <Route path="recipes" element={<Recipes />} />
+          <Route
+            path="recipes/add"
+            element={
+              <ProtectedRoute>
+                <AddRecipe />
+              </ProtectedRoute>
+            }
+          />
           <Route path="recipes/:id" element={<RecipeDetail />} />
-
-          {/* Routes protégées */}
           <Route
             path="favorites"
             element={
@@ -99,10 +86,8 @@ const Router = () => {
               </ProtectedRoute>
             }
           />
+          <Route path="*" element={<NotFound />} />
         </Route>
-
-        {/* Route 404 */}
-        <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>
   );

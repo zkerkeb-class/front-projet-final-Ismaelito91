@@ -4,6 +4,7 @@ import { useTranslation } from "react-i18next";
 import { useApp } from "../../contexts/AppContext";
 import Header from "./Header";
 import Sidebar from "./Sidebar";
+import InfoCards from "../common/InfoCards";
 import NotificationContainer from "../common/Notification";
 import Loader from "../common/Loader";
 import "./MainLayout.css";
@@ -36,6 +37,8 @@ const MainLayout = () => {
             <Outlet />
           </div>
         </main>
+
+        <InfoCards />
       </div>
 
       {/* Overlay pour fermer la sidebar sur mobile */}
