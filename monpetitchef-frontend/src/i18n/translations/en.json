@@ -1,0 +1,178 @@
+{
+  "nav": {
+    "home": "Home",
+    "recipes": "Recipes",
+    "favorites": "Favorites",
+    "profile": "Profile",
+    "login": "Login",
+    "register": "Sign Up",
+    "addRecipe": "Add Recipe"
+  },
+  "auth": {
+    "login": "Login",
+    "register": "Sign Up",
+    "email": "Email",
+    "password": "Password",
+    "confirmPassword": "Confirm Password",
+    "firstName": "First Name",
+    "lastName": "Last Name",
+    "logout": "Logout",
+    "welcomeBack": "Welcome back!",
+    "createAccount": "Create account",
+    "signUpFree": "Sign up for free",
+    "alreadyAccount": "Already have an account?",
+    "noAccount": "Don't have an account yet?",
+    "createAccountSubtitle": "Create your account and start cooking!",
+    "registerSubtitle": "Create your account and start cooking!",
+    "required": "*",
+    "passwordHint": "Minimum 6 characters",
+    "placeholders": {
+      "firstName": "John",
+      "lastName": "Doe",
+      "email": "john.doe@example.com",
+      "password": "••••••••"
+    }
+  },
+  "validation": {
+    "required": "required",
+    "nameRequired": "Name is required",
+    "firstNameRequired": "First name is required",
+    "emailRequired": "Email is required",
+    "passwordRequired": "Password is required",
+    "passwordMismatch": "Passwords do not match",
+    "minLength": "must contain at least {count} characters",
+    "invalidEmail": "Invalid email format"
+  },
+  "ui": {
+    "darkMode": "Dark mode",
+    "lightMode": "Light mode",
+    "language": "Language",
+    "loading": "Loading...",
+    "save": "Save",
+    "cancel": "Cancel",
+    "confirm": "Confirm",
+    "edit": "Edit",
+    "delete": "Delete",
+    "close": "Close",
+    "back": "Back",
+    "next": "Next",
+    "previous": "Previous",
+    "viewAll": "View all",
+    "seeRecipes": "See recipes"
+  },
+  "messages": {
+    "welcome": "Welcome to Mon Petit Chef",
+    "loginSuccess": "Login successful!",
+    "loginError": "Login error",
+    "logoutSuccess": "Logout successful!",
+    "logoutOffline": "Local logout performed",
+    "registrationSuccess": "Registration successful! Welcome!",
+    "registrationError": "Registration error",
+    "error": "An error occurred",
+    "notFound": "Page not found",
+    "noRecipes": "No recipes found",
+    "loading": "Loading...",
+    "loadingRecipes": "Error loading recipes"
+  },
+  "home": {
+    "subtitle": "Discover, share and enjoy the best recipes from around the world",
+    "features": {
+      "recipes": {
+        "title": "Varied recipes",
+        "description": "Thousands of recipes for all tastes"
+      },
+      "favorites": {
+        "title": "Favorites",
+        "description": "Save your favorite recipes"
+      },
+      "community": {
+        "title": "Community",
+        "description": "Share and comment on your creations"
+      }
+    }
+  },
+  "recipes": {
+    "title": "Our Recipes",
+    "search": "Search for a recipe...",
+    "noResults": "No recipes found",
+    "ingredients": "Ingredients",
+    "instructions": "Instructions",
+    "prepTime": "Prep time",
+    "cookTime": "Cook time",
+    "servings": "Servings",
+    "difficulty": "Difficulty",
+    "category": "Category",
+    "allCategories": "All categories",
+    "allDifficulties": "All difficulties",
+    "filters": "Filters",
+    "by": "by",
+    "minutes": "min",
+    "rating": "Rating",
+    "viewRecipe": "View recipe"
+  },
+  "favorites": {
+    "title": "My favorites",
+    "empty": "You don't have any favorite recipes yet",
+    "add": "Add to favorites",
+    "remove": "Remove from favorites"
+  },
+  "profile": {
+    "title": "My profile",
+    "personalInfo": "Personal information",
+    "name": "Name",
+    "email": "Email",
+    "phone": "Phone",
+    "address": "Address"
+  },
+  "infoCards": {
+    "whyTitle": "Why MonPetitChef?",
+    "subtitle": "Discover what makes our culinary community so special",
+    "community": {
+      "title": "Trusted community",
+      "description": "MonPetitChef is a community platform where every recipe is shared by cooking enthusiasts like you.",
+      "highlight": "We trust our users"
+    },
+    "sharing": {
+      "title": "Authentic sharing",
+      "description": "Share your family recipes, original creations and discover the culinary secrets of our community.",
+      "highlight": "Verified and approved recipes"
+    },
+    "discovery": {
+      "title": "Culinary discovery",
+      "description": "Explore a diversity of flavors, techniques and culinary traditions from around the world, directly from our kitchens.",
+      "highlight": "Over 1000 recipes available"
+    },
+    "quality": {
+      "title": "Quality assured",
+      "description": "Rating and comment system to help you choose the best recipes according to your taste.",
+      "highlight": "Authentic ratings and reviews"
+    },
+    "joinCommunity": "Join our community!",
+    "joinDescription": "Create your free account and start sharing your favorite recipes with thousands of enthusiasts.",
+    "connect": "Sign in",
+    "statsTitle": "Our community in numbers",
+    "stats": {
+      "recipes": "Recipes",
+      "chefs": "Chefs",
+      "reviews": "Reviews",
+      "favorites": "Favorites"
+    },
+    "tipOfDay": "Tip of the day",
+    "tipContent": "For successful pastries, always weigh your ingredients rather than measuring them by volume. Precision is key!",
+    "tipAuthor": "— Chef Marie, pastry specialist"
+  },
+  "sidebar": {
+    "userSection": "User space",
+    "navigation": "Navigation",
+    "quickActions": "Quick actions",
+    "statistics": "Statistics",
+    "settings": "Settings",
+    "descriptions": {
+      "home": "Back to home",
+      "recipes": "Discover recipes",
+      "favorites": "My favorite recipes",
+      "profile": "Manage my account",
+      "addRecipe": "Create a new recipe"
+    }
+  }
+}

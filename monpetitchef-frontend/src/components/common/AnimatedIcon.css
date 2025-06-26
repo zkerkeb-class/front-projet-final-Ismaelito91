@@ -1,0 +1,410 @@
+/* Base des icônes animées */
+.animated-icon {
+  display: inline-block;
+  transition: transform var(--transition-fast);
+  transform-origin: center;
+  will-change: transform;
+}
+
+/* Tailles des icônes */
+.animated-icon--xs {
+  font-size: 0.75rem;
+}
+
+.animated-icon--sm {
+  font-size: 1rem;
+}
+
+.animated-icon--md {
+  font-size: 1.25rem;
+}
+
+.animated-icon--lg {
+  font-size: 1.5rem;
+}
+
+.animated-icon--xl {
+  font-size: 2rem;
+}
+
+.animated-icon--xxl {
+  font-size: 3rem;
+}
+
+/* Animations de base */
+
+/* Bounce - rebond */
+.animated-icon--bounce {
+  animation: iconBounce 2s ease-in-out infinite;
+}
+
+@keyframes iconBounce {
+  0%,
+  20%,
+  53%,
+  80%,
+  100% {
+    transform: translateY(0);
+  }
+  40%,
+  43% {
+    transform: translateY(-8px);
+  }
+  70% {
+    transform: translateY(-4px);
+  }
+  90% {
+    transform: translateY(-2px);
+  }
+}
+
+/* Float - flottement */
+.animated-icon--float {
+  animation: iconFloat 3s ease-in-out infinite;
+}
+
+@keyframes iconFloat {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+/* Pulse - pulsation */
+.animated-icon--pulse {
+  animation: iconPulse 2s ease-in-out infinite;
+}
+
+@keyframes iconPulse {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+}
+
+/* Shake - secousse */
+.animated-icon--shake {
+  animation: iconShake 1s ease-in-out infinite;
+}
+
+@keyframes iconShake {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  10%,
+  30%,
+  50%,
+  70%,
+  90% {
+    transform: translateX(-2px);
+  }
+  20%,
+  40%,
+  60%,
+  80% {
+    transform: translateX(2px);
+  }
+}
+
+/* Rotate - rotation */
+.animated-icon--rotate {
+  animation: iconRotate 4s linear infinite;
+}
+
+@keyframes iconRotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Spin - rotation rapide */
+.animated-icon--spin {
+  animation: iconSpin 2s linear infinite;
+}
+
+@keyframes iconSpin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Sway - balancement */
+.animated-icon--sway {
+  animation: iconSway 3s ease-in-out infinite;
+}
+
+@keyframes iconSway {
+  0%,
+  100% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(5deg);
+  }
+  75% {
+    transform: rotate(-5deg);
+  }
+}
+
+/* Zoom - zoom in/out */
+.animated-icon--zoom {
+  animation: iconZoom 2s ease-in-out infinite;
+}
+
+@keyframes iconZoom {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  25% {
+    transform: scale(1.2);
+  }
+  75% {
+    transform: scale(0.9);
+  }
+}
+
+/* Twinkle - scintillement */
+.animated-icon--twinkle {
+  animation: iconTwinkle 1.5s ease-in-out infinite;
+}
+
+@keyframes iconTwinkle {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.3;
+    transform: scale(0.8);
+  }
+}
+
+/* Ring - sonnerie */
+.animated-icon--ring {
+  animation: iconRing 2s ease-in-out infinite;
+}
+
+@keyframes iconRing {
+  0%,
+  100% {
+    transform: rotate(0deg);
+  }
+  10%,
+  20%,
+  30% {
+    transform: rotate(15deg);
+  }
+  15%,
+  25% {
+    transform: rotate(-15deg);
+  }
+}
+
+/* Steam - vapeur */
+.animated-icon--steam {
+  animation: iconSteam 2s ease-in-out infinite;
+}
+
+@keyframes iconSteam {
+  0%,
+  100% {
+    transform: translateY(0px) scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: translateY(-8px) scale(1.1);
+    opacity: 0.7;
+  }
+}
+
+/* Flicker - scintillement de flamme */
+.animated-icon--flicker {
+  animation: iconFlicker 1s ease-in-out infinite alternate;
+}
+
+@keyframes iconFlicker {
+  0% {
+    transform: rotate(-2deg) scale(1);
+    opacity: 1;
+  }
+  25% {
+    transform: rotate(2deg) scale(1.05);
+    opacity: 0.9;
+  }
+  50% {
+    transform: rotate(-1deg) scale(0.98);
+    opacity: 0.95;
+  }
+  75% {
+    transform: rotate(1deg) scale(1.02);
+    opacity: 0.8;
+  }
+  100% {
+    transform: rotate(0deg) scale(1);
+    opacity: 1;
+  }
+}
+
+/* Confetti - explosion de fête */
+.animated-icon--confetti {
+  animation: iconConfetti 3s ease-in-out infinite;
+}
+
+@keyframes iconConfetti {
+  0% {
+    transform: scale(1) rotate(0deg);
+  }
+  20% {
+    transform: scale(1.2) rotate(72deg);
+  }
+  40% {
+    transform: scale(0.9) rotate(144deg);
+  }
+  60% {
+    transform: scale(1.1) rotate(216deg);
+  }
+  80% {
+    transform: scale(0.95) rotate(288deg);
+  }
+  100% {
+    transform: scale(1) rotate(360deg);
+  }
+}
+
+/* Tick - mouvement d'horloge */
+.animated-icon--tick {
+  animation: iconTick 1s ease-in-out infinite;
+}
+
+@keyframes iconTick {
+  0%,
+  90%,
+  100% {
+    transform: rotate(0deg);
+  }
+  5% {
+    transform: rotate(6deg);
+  }
+  10% {
+    transform: rotate(-3deg);
+  }
+}
+
+/* Check - validation */
+.animated-icon--check {
+  animation: iconCheck 2s ease-in-out infinite;
+}
+
+@keyframes iconCheck {
+  0%,
+  80%,
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  40% {
+    transform: scale(1.3);
+    opacity: 0.8;
+  }
+}
+
+/* Warning - avertissement */
+.animated-icon--warning {
+  animation: iconWarning 1.5s ease-in-out infinite;
+}
+
+@keyframes iconWarning {
+  0%,
+  100% {
+    transform: scale(1);
+    filter: brightness(1);
+  }
+  50% {
+    transform: scale(1.1);
+    filter: brightness(1.3);
+  }
+}
+
+/* Glow - lueur */
+.animated-icon--glow {
+  animation: iconGlow 2s ease-in-out infinite alternate;
+}
+
+@keyframes iconGlow {
+  0% {
+    filter: brightness(1) drop-shadow(0 0 2px currentColor);
+  }
+  100% {
+    filter: brightness(1.3) drop-shadow(0 0 8px currentColor);
+  }
+}
+
+/* Effets de survol */
+.animated-icon:hover {
+  animation-play-state: paused;
+  transform: scale(1.2);
+  cursor: pointer;
+}
+
+/* Animation au survol spécifique */
+.animated-icon--hover-bounce:hover {
+  animation: iconHoverBounce 0.6s ease-in-out;
+}
+
+@keyframes iconHoverBounce {
+  0%,
+  100% {
+    transform: scale(1.2);
+  }
+  50% {
+    transform: scale(1.4);
+  }
+}
+
+/* Réduction de mouvement pour l'accessibilité */
+@media (prefers-reduced-motion: reduce) {
+  .animated-icon {
+    animation: none !important;
+  }
+
+  .animated-icon:hover {
+    transform: scale(1.1);
+  }
+}
+
+/* Effets spéciaux */
+.animated-icon--rainbow {
+  animation: iconRainbow 3s linear infinite;
+}
+
+@keyframes iconRainbow {
+  0% {
+    filter: hue-rotate(0deg);
+  }
+  100% {
+    filter: hue-rotate(360deg);
+  }
+}
+
+.animated-icon--shadow {
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+}
+
+.animated-icon--glow-constant {
+  filter: drop-shadow(0 0 8px currentColor);
+}
